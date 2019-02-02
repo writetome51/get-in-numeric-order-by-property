@@ -15,25 +15,25 @@ function getInNumericOrderByProperty(property, objects) {
     // of the array passed in.
     if (isArray_notArray_1.isArray(objects) && objects.length === 1)
         return array_get_copy_1.getCopy(objects);
-    var lessThanAverage_and_atLeastAverage = getSeparatedInTwoArrays_usingAverageAsTheSeparator(objects, property);
+    var lessThanAverage_and_atLeastAverage = getLessThanAverage_and_atLeastAverage(objects, property);
     // It's possible that at least one of the two lists is now sorted.
     lessThanAverage_and_atLeastAverage =
-        getInNumericOrder_ifTheyAreStillNot(lessThanAverage_and_atLeastAverage);
+        getListsInNumericOrder_ifTheyAreStillNot(lessThanAverage_and_atLeastAverage);
     return array_get_merged_arrays_1.getMergedArrays(lessThanAverage_and_atLeastAverage);
-    function getSeparatedInTwoArrays_usingAverageAsTheSeparator(objects, property) {
+    function getLessThanAverage_and_atLeastAverage(objects, property) {
         var average = get_average_from_property_1.getAverageFromProperty(property, objects);
-        return getLessThanAverage_and_atLeastAverage(average, objects, property);
+        return getSplitIntoTwoLists(average, objects, property);
     }
-    function getLessThanAverage_and_atLeastAverage(average, objects, property) {
+    function getSplitIntoTwoLists(separator, objects, property) {
         for (var i = 0, lessThan = [], atLeast = []; i < objects.length; ++i) {
-            if (objects[i][property] < average)
+            if (objects[i][property] < separator)
                 array_append_prepend_1.append([objects[i]], lessThan);
             else
                 array_append_prepend_1.append([objects[i]], atLeast);
         }
         return [lessThan, atLeast];
     }
-    function getInNumericOrder_ifTheyAreStillNot(lists) {
+    function getListsInNumericOrder_ifTheyAreStillNot(lists) {
         for (var i = 0; i < lists.length; ++i) {
             var numbers = get_array_from_property_1.getArrayFromProperty(property, lists[i]);
             if (in_ascending_order_1.notInAscendingOrder(numbers)) {

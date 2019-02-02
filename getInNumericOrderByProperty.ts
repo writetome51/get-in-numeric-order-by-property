@@ -17,33 +17,33 @@ export function getInNumericOrderByProperty(property, objects): any[] {
 	// of the array passed in.
 	if (isArray(objects) && objects.length === 1) return getCopy(objects);
 
-	let lessThanAverage_and_atLeastAverage =
-		getSeparatedInTwoArrays_usingAverageAsTheSeparator(objects, property);
+	let lessThanAverage_and_atLeastAverage = getLessThanAverage_and_atLeastAverage(objects, property);
 
 	// It's possible that at least one of the two lists is now sorted.
 	lessThanAverage_and_atLeastAverage =
-		getInNumericOrder_ifTheyAreStillNot(lessThanAverage_and_atLeastAverage);
+		getListsInNumericOrder_ifTheyAreStillNot(lessThanAverage_and_atLeastAverage);
 
 	return getMergedArrays(lessThanAverage_and_atLeastAverage);
 
 
-	function getSeparatedInTwoArrays_usingAverageAsTheSeparator(objects, property) {
+	function getLessThanAverage_and_atLeastAverage(objects, property) {
 		var average = getAverageFromProperty(property, objects);
-		return getLessThanAverage_and_atLeastAverage(average, objects, property);
+		return getSplitIntoTwoLists(average, objects, property);
 	}
 
 
-	function getLessThanAverage_and_atLeastAverage(average, objects, property) {
+	function getSplitIntoTwoLists(separator, objects, property) {
 		for (var i = 0, lessThan = [], atLeast = []; i < objects.length; ++i) {
 
-			if (objects[i][property] < average) append([objects[i]], lessThan);
+			if (objects[i][property] < separator) append([objects[i]], lessThan);
+
 			else append([objects[i]], atLeast);
 		}
 		return [lessThan, atLeast];
 	}
 
 
-	function getInNumericOrder_ifTheyAreStillNot(lists) {
+	function getListsInNumericOrder_ifTheyAreStillNot(lists) {
 		for (let i = 0; i < lists.length; ++i) {
 			let numbers = getArrayFromProperty(property, lists[i]);
 

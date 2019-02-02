@@ -4,7 +4,8 @@
 
 Returns new array of <b>objects</b> re-ordered by the numeric value of <b>property</b> in each.  
 The <b>property</b> in each object must be type 'number' and must be a finite number.  
-Does not modify passed <b>objects</b>.
+Does not modify passed <b>objects</b>.  
+NOTE: if any object in <b>objects</b> does not have the <b>property</b>, the function will error.
 
 ## Examples
 ```
