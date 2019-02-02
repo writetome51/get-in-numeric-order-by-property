@@ -1,9 +1,6 @@
 import { getInNumericOrderByProperty } from './getInNumericOrderByProperty';
 
 
-// @ts-ignore
-let arrayPluck = require('array-pluck');
-
 
 let players = [
 	{team: 'mets', homeRuns: 15},

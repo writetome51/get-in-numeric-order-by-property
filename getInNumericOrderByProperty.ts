@@ -4,8 +4,7 @@ import { append } from '@writetome51/array-append-prepend';
 import { notInAscendingOrder } from '@writetome51/in-ascending-order';
 import { isArray } from 'basic-data-handling/isArray_notArray';
 import { getCopy } from '@writetome51/array-get-copy';
-// @ts-ignore
-let arrayPluck = require('array-pluck');
+import { getArrayFromProperty } from '@writetome51/get-array-from-property';
 
 
 /*****
@@ -46,7 +45,7 @@ export function getInNumericOrderByProperty(property, objects): any[] {
 
 	function getInNumericOrder_ifTheyAreStillNot(lists) {
 		for (let i = 0; i < lists.length; ++i) {
-			let numbers = arrayPluck(lists[i], property);
+			let numbers = getArrayFromProperty(property, lists[i]);
 
 			if (notInAscendingOrder(numbers)) {
 				lists[i] = getInNumericOrderByProperty(property, lists[i]);

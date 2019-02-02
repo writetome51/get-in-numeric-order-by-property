@@ -6,8 +6,7 @@ var array_append_prepend_1 = require("@writetome51/array-append-prepend");
 var in_ascending_order_1 = require("@writetome51/in-ascending-order");
 var isArray_notArray_1 = require("basic-data-handling/isArray_notArray");
 var array_get_copy_1 = require("@writetome51/array-get-copy");
-// @ts-ignore
-var arrayPluck = require('array-pluck');
+var get_array_from_property_1 = require("@writetome51/get-array-from-property");
 /*****
  Returns new array of objects, re-ordered numerically by property.
  *****/
@@ -36,7 +35,7 @@ function getInNumericOrderByProperty(property, objects) {
     }
     function getInNumericOrder_ifTheyAreStillNot(lists) {
         for (var i = 0; i < lists.length; ++i) {
-            var numbers = arrayPluck(lists[i], property);
+            var numbers = get_array_from_property_1.getArrayFromProperty(property, lists[i]);
             if (in_ascending_order_1.notInAscendingOrder(numbers)) {
                 lists[i] = getInNumericOrderByProperty(property, lists[i]);
             }

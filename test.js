@@ -1,8 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var getInNumericOrderByProperty_1 = require("./getInNumericOrderByProperty");
-// @ts-ignore
-var arrayPluck = require('array-pluck');
 var players = [
     { team: 'mets', homeRuns: 15 },
     { team: 'yankees', homeRuns: 25 },
