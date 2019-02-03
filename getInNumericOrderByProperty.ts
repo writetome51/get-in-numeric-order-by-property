@@ -5,10 +5,12 @@ import { notInAscendingOrder } from '@writetome51/in-ascending-order';
 import { isArray } from 'basic-data-handling/isArray_notArray';
 import { getCopy } from '@writetome51/array-get-copy';
 import { getArrayFromProperty } from '@writetome51/get-array-from-property';
+import { getProperty } from '@writetome51/get-property';
 
 
 /*****
  Returns new array of objects, re-ordered numerically by property.
+ property can contain dot-notation.
  *****/
 
 export function getInNumericOrderByProperty(property, objects): any[] {
@@ -27,7 +29,7 @@ export function getInNumericOrderByProperty(property, objects): any[] {
 
 
 	function getLessThanAverage_and_atLeastAverage(objects, property) {
-		var average = getAverageFromProperty(property, objects);
+		let average = getAverageFromProperty(property, objects);
 		return getSplitIntoTwoLists(average, objects, property);
 	}
 
@@ -35,7 +37,9 @@ export function getInNumericOrderByProperty(property, objects): any[] {
 	function getSplitIntoTwoLists(separator, objects, property) {
 		for (var i = 0, lessThan = [], atLeast = []; i < objects.length; ++i) {
 
-			if (objects[i][property] < separator) append([objects[i]], lessThan);
+			// getProperty() allows property to contain dot-notation.
+			let value = getProperty(property, objects[i]);
+			if (value < separator) append([objects[i]], lessThan);
 
 			else append([objects[i]], atLeast);
 		}

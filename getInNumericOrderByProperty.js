@@ -7,8 +7,10 @@ var in_ascending_order_1 = require("@writetome51/in-ascending-order");
 var isArray_notArray_1 = require("basic-data-handling/isArray_notArray");
 var array_get_copy_1 = require("@writetome51/array-get-copy");
 var get_array_from_property_1 = require("@writetome51/get-array-from-property");
+var get_property_1 = require("@writetome51/get-property");
 /*****
  Returns new array of objects, re-ordered numerically by property.
+ property can contain dot-notation.
  *****/
 function getInNumericOrderByProperty(property, objects) {
     // This line returns a copy because this function is expected to return an array independent
@@ -26,7 +28,9 @@ function getInNumericOrderByProperty(property, objects) {
     }
     function getSplitIntoTwoLists(separator, objects, property) {
         for (var i = 0, lessThan = [], atLeast = []; i < objects.length; ++i) {
-            if (objects[i][property] < separator)
+            // getProperty() allows property to contain dot-notation.
+            var value = get_property_1.getProperty(property, objects[i]);
+            if (value < separator)
                 array_append_prepend_1.append([objects[i]], lessThan);
             else
                 array_append_prepend_1.append([objects[i]], atLeast);

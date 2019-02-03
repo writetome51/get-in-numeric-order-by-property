@@ -109,6 +109,19 @@ if (errorTriggered)
     console.log('test 1D passed');
 else
     console.log('test 1D FAILED');
+// Test 1E: it should work with dot-notation in the property.
+players = [
+    { team: { name: 'red sox', Home__Runs: 13.05 } },
+    { team: { name: 'blue jays', Home__Runs: 3.56 } },
+    { team: { name: 'padres', Home__Runs: 19.81 } },
+    { team: { name: 'rockies', Home__Runs: 15.88 } }
+];
+sortedPlayers = getInNumericOrderByProperty_1.getInNumericOrderByProperty('team.Home__Runs', players);
+homeRuns = get_array_from_property_1.getArrayFromProperty('team.Home__Runs', sortedPlayers);
+if (arrays_match_1.arraysMatch(homeRuns, [3.56, 13.05, 15.88, 19.81]))
+    console.log('test 1E passed');
+else
+    console.log('test 1E FAILED');
 // Test 2: it should error if first argument is not string.
 errorTriggered = false;
 try {
