@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var get_average_from_property_1 = require("@writetome51/get-average-from-property");
-var array_get_merged_arrays_1 = require("@writetome51/array-get-merged-arrays");
-var array_append_prepend_1 = require("@writetome51/array-append-prepend");
-var in_ascending_order_1 = require("@writetome51/in-ascending-order");
 var isArray_notArray_1 = require("basic-data-handling/isArray_notArray");
+var array_append_prepend_1 = require("@writetome51/array-append-prepend");
 var array_get_copy_1 = require("@writetome51/array-get-copy");
+var array_get_merged_arrays_1 = require("@writetome51/array-get-merged-arrays");
+var get_average_from_property_1 = require("@writetome51/get-average-from-property");
 var get_array_from_property_1 = require("@writetome51/get-array-from-property");
 var get_property_1 = require("@writetome51/get-property");
+var in_ascending_order_1 = require("@writetome51/in-ascending-order");
 /*****
  Returns new array of objects, re-ordered numerically by property.
  property can contain dot-notation.

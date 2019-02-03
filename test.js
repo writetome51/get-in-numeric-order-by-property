@@ -1,9 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var getInNumericOrderByProperty_1 = require("./getInNumericOrderByProperty");
+var index_1 = require("./index");
 var arrays_match_1 = require("@writetome51/arrays-match");
 var get_array_from_property_1 = require("@writetome51/get-array-from-property");
+// Test 0: make sure it can sort a list of only 2 objects without problem.
 var players = [
+    { name: 'red sox', homeRuns: 13.05 },
+    { name: 'blue jays', homeRuns: 3.56 }
+];
+var sortedPlayers = index_1.getInNumericOrderByProperty('homeRuns', players);
+var homeRuns = get_array_from_property_1.getArrayFromProperty('homeRuns', sortedPlayers);
+if (arrays_match_1.arraysMatch(homeRuns, [3.56, 13.05]))
+    console.log('test 0 passed');
+else
+    console.log('test 0 FAILED');
+players = [
     { team: 'mets', homeRuns: 15 },
     { team: 'yankees', homeRuns: 25 },
     { team: 'athletics', homeRuns: 5 },
@@ -24,8 +35,8 @@ var players = [
     { team: 'padres', homeRuns: 1 }
 ];
 // Test 1: make sure it can do a basic integer sort.
-var sortedPlayers = getInNumericOrderByProperty_1.getInNumericOrderByProperty('homeRuns', players);
-var homeRuns = get_array_from_property_1.getArrayFromProperty('homeRuns', sortedPlayers);
+sortedPlayers = index_1.getInNumericOrderByProperty('homeRuns', players);
+homeRuns = get_array_from_property_1.getArrayFromProperty('homeRuns', sortedPlayers);
 if (arrays_match_1.arraysMatch(homeRuns, [1, 1, 2, 5, 5, 5, 10, 11, 14, 15, 15, 15, 20, 25, 25, 31, 55, 70]))
     console.log('test 1 passed');
 else
@@ -51,7 +62,7 @@ players = [
     { team: 'athletics', homeRuns: 5.039 },
     { team: 'padres', homeRuns: 1.111 }
 ];
-sortedPlayers = getInNumericOrderByProperty_1.getInNumericOrderByProperty('homeRuns', players);
+sortedPlayers = index_1.getInNumericOrderByProperty('homeRuns', players);
 homeRuns = get_array_from_property_1.getArrayFromProperty('homeRuns', sortedPlayers);
 if (arrays_match_1.arraysMatch(homeRuns, [1.111, 1.112, 2.6, 5.039, 5.044, 5.045, 10.1, 11.2, 14.2,
     15.88, 15.998, 15.999, 20.2, 25.02, 25.03, 31.7, 55.2, 70.2]))
@@ -69,7 +80,7 @@ players = [
     { team: 'angels', Home__Runs: 20.2 },
     { team: 'rockies', Home__Runs: 31.7 }
 ];
-sortedPlayers = getInNumericOrderByProperty_1.getInNumericOrderByProperty('Home__Runs', players);
+sortedPlayers = index_1.getInNumericOrderByProperty('Home__Runs', players);
 homeRuns = get_array_from_property_1.getArrayFromProperty('Home__Runs', sortedPlayers);
 if (arrays_match_1.arraysMatch(homeRuns, [1.112, 5.045, 11.2, 15.88, 20.2, 25.03, 31.7, 55.2]))
     console.log('test 1B passed');
@@ -78,7 +89,7 @@ else
 // Test 1C: it should error if array is empty.
 var errorTriggered = false;
 try {
-    sortedPlayers = getInNumericOrderByProperty_1.getInNumericOrderByProperty('Home__Runs', []);
+    sortedPlayers = index_1.getInNumericOrderByProperty('Home__Runs', []);
 }
 catch (e) {
     errorTriggered = true;
@@ -100,7 +111,7 @@ players = [
 ];
 errorTriggered = false;
 try {
-    sortedPlayers = getInNumericOrderByProperty_1.getInNumericOrderByProperty('Home__Runs', players);
+    sortedPlayers = index_1.getInNumericOrderByProperty('Home__Runs', players);
 }
 catch (e) {
     errorTriggered = true;
@@ -116,7 +127,7 @@ players = [
     { team: { name: 'padres', Home__Runs: 19.81 } },
     { team: { name: 'rockies', Home__Runs: 15.88 } }
 ];
-sortedPlayers = getInNumericOrderByProperty_1.getInNumericOrderByProperty('team.Home__Runs', players);
+sortedPlayers = index_1.getInNumericOrderByProperty('team.Home__Runs', players);
 homeRuns = get_array_from_property_1.getArrayFromProperty('team.Home__Runs', sortedPlayers);
 if (arrays_match_1.arraysMatch(homeRuns, [3.56, 13.05, 15.88, 19.81]))
     console.log('test 1E passed');
@@ -125,7 +136,7 @@ else
 // Test 2: it should error if first argument is not string.
 errorTriggered = false;
 try {
-    var result = getInNumericOrderByProperty_1.getInNumericOrderByProperty(0, players);
+    var result_1 = index_1.getInNumericOrderByProperty(0, players);
 }
 catch (e) {
     errorTriggered = true;
@@ -137,7 +148,7 @@ else
 // Test 3: it should error if second argument is not array.
 errorTriggered = false;
 try {
-    var result = getInNumericOrderByProperty_1.getInNumericOrderByProperty('team', 'players');
+    var result_2 = index_1.getInNumericOrderByProperty('team', 'players');
 }
 catch (e) {
     errorTriggered = true;
@@ -146,3 +157,10 @@ if (errorTriggered)
     console.log('test 3 passed');
 else
     console.log('test 3 FAILED');
+// Test 4: speed test.
+var objs = [];
+for (var i = 10000; i > 0; --i) {
+    objs.push({ homeRuns: i });
+}
+var result = index_1.getInNumericOrderByProperty('homeRuns', objs);
+console.log(result.length);

@@ -1,9 +1,20 @@
-import { getInNumericOrderByProperty } from './getInNumericOrderByProperty';
+import { getInNumericOrderByProperty } from './index';
 import { arraysMatch } from '@writetome51/arrays-match';
 import { getArrayFromProperty } from '@writetome51/get-array-from-property';
 
 
+// Test 0: make sure it can sort a list of only 2 objects without problem.
 let players: any[] = [
+	{name: 'red sox', homeRuns: 13.05},
+	{name: 'blue jays', homeRuns: 3.56}
+];
+let sortedPlayers = getInNumericOrderByProperty('homeRuns', players);
+let homeRuns = getArrayFromProperty('homeRuns', sortedPlayers);
+if (arraysMatch(homeRuns, [3.56, 13.05])) console.log('test 0 passed');
+else console.log('test 0 FAILED');
+
+
+players = [
 	{team: 'mets', homeRuns: 15},
 	{team: 'yankees', homeRuns: 25},
 	{team: 'athletics', homeRuns: 5},
@@ -25,8 +36,8 @@ let players: any[] = [
 ];
 
 // Test 1: make sure it can do a basic integer sort.
-let sortedPlayers = getInNumericOrderByProperty('homeRuns', players);
-let homeRuns = getArrayFromProperty('homeRuns', sortedPlayers);
+sortedPlayers = getInNumericOrderByProperty('homeRuns', players);
+homeRuns = getArrayFromProperty('homeRuns', sortedPlayers);
 if (arraysMatch(homeRuns, [1, 1, 2, 5, 5, 5, 10, 11, 14, 15, 15, 15, 20, 25, 25, 31, 55, 70]))
 	console.log('test 1 passed');
 else console.log('test 1 FAILED');
@@ -117,17 +128,16 @@ else console.log('test 1D FAILED');
 
 // Test 1E: it should work with dot-notation in the property.
 players = [
-	{team: {name:'red sox', Home__Runs: 13.05}},
-	{team: {name:'blue jays', Home__Runs: 3.56}},
-	{team: {name:'padres', Home__Runs: 19.81}},
-	{team: {name:'rockies', Home__Runs: 15.88}}
+	{team: {name: 'red sox', Home__Runs: 13.05}},
+	{team: {name: 'blue jays', Home__Runs: 3.56}},
+	{team: {name: 'padres', Home__Runs: 19.81}},
+	{team: {name: 'rockies', Home__Runs: 15.88}}
 ];
 sortedPlayers = getInNumericOrderByProperty('team.Home__Runs', players);
 homeRuns = getArrayFromProperty('team.Home__Runs', sortedPlayers);
 if (arraysMatch(homeRuns, [3.56, 13.05, 15.88, 19.81]))
 	console.log('test 1E passed');
 else console.log('test 1E FAILED');
-
 
 
 // Test 2: it should error if first argument is not string.
@@ -152,3 +162,13 @@ catch (e) {
 }
 if (errorTriggered) console.log('test 3 passed');
 else console.log('test 3 FAILED');
+
+
+// Test 4: speed test.
+let objs = [];
+for (let i = 10000; i > 0; --i) {
+	objs.push({homeRuns: i})
+}
+let result = getInNumericOrderByProperty('homeRuns', objs);
+console.log(result.length);
+
