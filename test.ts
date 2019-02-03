@@ -167,8 +167,18 @@ else console.log('test 3 FAILED');
 // Test 4: speed test.
 let objs = [];
 for (let i = 10000; i > 0; --i) {
-	objs.push({homeRuns: i})
+	objs.push({homeRuns: i});
 }
 let result = getInNumericOrderByProperty('homeRuns', objs);
 console.log(result.length);
 
+
+players = [
+	{name: 'joe', numbers: [10, 5, 20]},
+	{name: 'todd', numbers: [7, 15, 9]},
+	{name: 'rick', numbers: [1, 2, 19]},
+	{name: 'nelly', numbers: [4, 3, 21]}
+];
+// sort by the second number in each numbers array:
+sortedPlayers = getInNumericOrderByProperty('numbers.1', players);
+console.log(sortedPlayers);
