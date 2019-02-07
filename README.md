@@ -77,6 +77,6 @@ npm install @writetome51/get-in-numeric-order-by-property
 import {getInNumericOrderByProperty} from '@writetome51/get-in-numeric-order-by-property';
 // If using ES5 JavaScript:
 var getInNumericOrderByProperty = 
-    require('@writetome51/get-in-numeric-order-by-property').getObjectFromJSON;
+    require('@writetome51/get-in-numeric-order-by-property').getInNumericOrderByProperty;
 ```
 
