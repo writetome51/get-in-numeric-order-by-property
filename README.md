@@ -1,12 +1,15 @@
-# getInNumericOrderByProperty
+# getInNumericOrderByProperty(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;property,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objects<br>): any[]
 
-## getInNumericOrderByProperty(property, objects): any[]
+Returns new array of `objects` re-ordered by the numeric value of `property` in each.  
+The `property` in each object must be type 'number' and must be a finite number.  
+The parameter `property` is a string that can include dot notation  
+( i.e,  `'property.subproperty.subsubproperty'` ) .  
+Does not modify original `objects` array.  
 
-Returns new array of <b>objects</b> re-ordered by the numeric value of <b>property</b> in each.  
-The <b>property</b> in each object must be type 'number' and must be a finite number.  
-The parameter <b>property</b> is a string that can include dot notation ( i.e,  `'property.subproperty.subsubproperty'` ) .  
-Does not modify passed <b>objects</b>.  
-NOTE: if any object in <b>objects</b> does not have the <b>property</b>, the function will error.
+NOTE: if any object in `objects` does not have `property`, the function will error.  
+NOTE:  `property` does not have to be an object key.  It can also be an array index.  
+If referring to array indexes, here you need to use dot-notation and not  
+square braces.  Example: `'1.0' instead of [1][0]`
 
 ## Examples
 ```
