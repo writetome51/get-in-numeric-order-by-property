@@ -1,6 +1,6 @@
 {
   "name": "@writetome51/get-in-numeric-order-by-property",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Re-orders objects by the numeric value of a particular property in each.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -14,8 +14,10 @@
   "keywords": [
     "sort",
     "objects",
+    "array",
     "numeric",
     "sequential",
+    "ascending",
     "order"
   ],
   "author": "Steve Thompson",
@@ -25,16 +27,16 @@
   },
   "homepage": "https://github.com/writetome51/get-in-numeric-order-by-property#readme",
   "devDependencies": {
-    "@writetome51/arrays-match": "~1.0.5"
+    "@writetome51/arrays-match": "~1.0.6"
   },
   "dependencies": {
-    "basic-data-handling": "~1.0.15",
     "@writetome51/array-append-prepend": "~1.0.5",
-    "@writetome51/array-get-copy": "~1.1.2",
-    "@writetome51/array-get-merged-arrays": "~1.1.2",
+    "@writetome51/array-get-copy": "~1.1.3",
+    "@writetome51/array-get-merged-arrays": "~1.1.3",
     "@writetome51/get-average-from-property": "~1.1.1",
     "@writetome51/get-array-from-property": "~1.1.1",
-    "@writetome51/get-property": "~1.0.2",
-    "@writetome51/in-ascending-order": "~1.0.2"
+    "@writetome51/get-property": "~1.0.4",
+    "@writetome51/in-numeric-order": "~1.0.1",
+    "@writetome51/is-array-not-array": "~1.0.0"
   }
 }

@@ -1,11 +1,11 @@
-import { isArray } from 'basic-data-handling/isArray_notArray';
 import { append } from '@writetome51/array-append-prepend';
 import { getCopy } from '@writetome51/array-get-copy';
 import { getMergedArrays } from '@writetome51/array-get-merged-arrays';
 import { getAverageFromProperty } from '@writetome51/get-average-from-property';
 import { getArrayFromProperty } from '@writetome51/get-array-from-property';
 import { getProperty } from '@writetome51/get-property';
-import { notInAscendingOrder } from '@writetome51/in-ascending-order';
+import { isArray } from '@writetome51/is-array-not-array';
+import { notInNumericOrder } from '@writetome51/in-numeric-order';
 
 
 /*****
@@ -51,7 +51,7 @@ export function getInNumericOrderByProperty(property, objects): any[] {
 		for (let i = 0; i < lists.length; ++i) {
 			let numbers = getArrayFromProperty(property, lists[i]);
 
-			if (notInAscendingOrder(numbers)) {
+			if (notInNumericOrder(numbers)) {
 				lists[i] = getInNumericOrderByProperty(property, lists[i]);
 			}
 		}

@@ -170,7 +170,9 @@ for (let i = 10000; i > 0; --i) {
 	objs.push({homeRuns: i});
 }
 let result = getInNumericOrderByProperty('homeRuns', objs);
-console.log(result.length);
+
+console.log(result.length); // 10000
+console.log(result[result.length - 1]); // { homeRuns: 10000 }
 
 
 players = [
