@@ -1,50 +1,54 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var array_append_prepend_1 = require("@writetome51/array-append-prepend");
-var array_get_copy_1 = require("@writetome51/array-get-copy");
-var array_get_merged_arrays_1 = require("@writetome51/array-get-merged-arrays");
-var get_average_from_property_1 = require("@writetome51/get-average-from-property");
-var get_array_from_property_1 = require("@writetome51/get-array-from-property");
-var get_property_1 = require("@writetome51/get-property");
-var is_array_not_array_1 = require("@writetome51/is-array-not-array");
-var in_numeric_order_1 = require("@writetome51/in-numeric-order");
+import {getArrayCopy} from '@writetome51/get-array-copy';
+import {getArrayFromProperty} from '@writetome51/get-array-from-property';
+import {getAverageFromProperty} from '@writetome51/get-average-from-property';
+import {getMergedArrays} from '@writetome51/array-get-merged-arrays';
+import {getProperty} from '@writetome51/get-property';
+import {isArray} from '@writetome51/is-array-not-array';
+import {inNumericOrder} from '@writetome51/in-numeric-order';
+import {not} from '@writetome51/not';
+
+
 /*****
- Returns new array of objects, re-ordered numerically by property.
- property can contain dot-notation.
+ Returns new array of objects, re-ordered numerically by `property`.
+ `property` can contain dot-notation.
  *****/
-function getInNumericOrderByProperty(property, objects) {
-    // This line returns a copy because this function is expected to return an array independent
-    // of the array passed in.
-    if (is_array_not_array_1.isArray(objects) && objects.length === 1)
-        return array_get_copy_1.getCopy(objects);
-    var lessThanAverage_and_atLeastAverage = getLessThanAverage_and_atLeastAverage(objects, property);
-    // It's possible that at least one of the two lists is now sorted.
-    lessThanAverage_and_atLeastAverage =
-        getListsInNumericOrder_ifTheyAreStillNot(lessThanAverage_and_atLeastAverage);
-    return array_get_merged_arrays_1.getMergedArrays(lessThanAverage_and_atLeastAverage);
-    function getLessThanAverage_and_atLeastAverage(objects, property) {
-        var average = get_average_from_property_1.getAverageFromProperty(property, objects);
-        return getSplitIntoTwoLists(average, objects, property);
-    }
-    function getSplitIntoTwoLists(separator, objects, property) {
-        for (var i = 0, lessThan = [], atLeast = []; i < objects.length; ++i) {
-            // getProperty() allows property to contain dot-notation.
-            var value = get_property_1.getProperty(property, objects[i]);
-            if (value < separator)
-                array_append_prepend_1.append([objects[i]], lessThan);
-            else
-                array_append_prepend_1.append([objects[i]], atLeast);
-        }
-        return [lessThan, atLeast];
-    }
-    function getListsInNumericOrder_ifTheyAreStillNot(lists) {
-        for (var i = 0; i < lists.length; ++i) {
-            var numbers = get_array_from_property_1.getArrayFromProperty(property, lists[i]);
-            if (in_numeric_order_1.notInNumericOrder(numbers)) {
-                lists[i] = getInNumericOrderByProperty(property, lists[i]);
-            }
-        }
-        return lists;
-    }
+
+export function getInNumericOrderByProperty(property, objects) {
+	// This line returns a copy because this function is expected to return a new array.
+	if (isArray(objects) && objects.length === 1) return getArrayCopy(objects);
+
+	let [lessThanAverage, atLeastAverage] = get_lessThanAverage_and_atLeastAverage(objects, property);
+
+	[lessThanAverage, atLeastAverage] =
+		getInNumericOrder_ifTheyAreStillNot([lessThanAverage, atLeastAverage]);
+
+	return getMergedArrays([lessThanAverage, atLeastAverage]);
+
+
+	function get_lessThanAverage_and_atLeastAverage(objects, property) {
+		let average = getAverageFromProperty(property, objects);
+
+		for (var i = 0, lessThan = [], atLeast = []; i < objects.length; ++i) {
+
+			let num = getProperty(property, objects[i]);
+			if (num < average) lessThan.push(objects[i]);
+			else atLeast.push(objects[i]);
+		}
+		return [lessThan, atLeast];
+	}
+
+
+	function getInNumericOrder_ifTheyAreStillNot(lists) {
+		for (let i = 0; i < lists.length; ++i) {
+
+			if (lists[i].length > 0) {
+				let numbers = getArrayFromProperty(property, lists[i]);
+				if (not(inNumericOrder(numbers))) {
+					lists[i] = getInNumericOrderByProperty(property, lists[i]);
+				}
+			}
+		}
+		return lists;
+	}
+
 }
-exports.getInNumericOrderByProperty = getInNumericOrderByProperty;

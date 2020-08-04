@@ -1,15 +1,15 @@
-import { getInNumericOrderByProperty } from './index';
-import { arraysMatch } from '@writetome51/arrays-match';
-import { getArrayFromProperty } from '@writetome51/get-array-from-property';
-
+import {getInNumericOrderByProperty} from './index.js';
+import {arraysMatch} from '@writetome51/arrays-match';
+import {getArrayFromProperty} from '@writetome51/get-array-from-property';
 
 // Test 0: make sure it can sort a list of only 2 objects without problem.
-let players: any[] = [
+let players = [
 	{name: 'red sox', homeRuns: 13.05},
 	{name: 'blue jays', homeRuns: 3.56}
 ];
 let sortedPlayers = getInNumericOrderByProperty('homeRuns', players);
 let homeRuns = getArrayFromProperty('homeRuns', sortedPlayers);
+
 if (arraysMatch(homeRuns, [3.56, 13.05])) console.log('test 0 passed');
 else console.log('test 0 FAILED');
 
@@ -66,11 +66,9 @@ players = [
 ];
 sortedPlayers = getInNumericOrderByProperty('homeRuns', players);
 homeRuns = getArrayFromProperty('homeRuns', sortedPlayers);
-if (arraysMatch(
-	homeRuns,
-	[1.111, 1.112, 2.6, 5.039, 5.044, 5.045, 10.1, 11.2, 14.2,
-		15.88, 15.998, 15.999, 20.2, 25.02, 25.03, 31.7, 55.2, 70.2]
-)) console.log('test 1A passed');
+if (arraysMatch(homeRuns, [1.111, 1.112, 2.6, 5.039, 5.044, 5.045, 10.1, 11.2, 14.2,
+	15.88, 15.998, 15.999, 20.2, 25.02, 25.03, 31.7, 55.2, 70.2]))
+	console.log('test 1A passed');
 else console.log('test 1A FAILED');
 
 
@@ -87,8 +85,7 @@ players = [
 ];
 sortedPlayers = getInNumericOrderByProperty('Home__Runs', players);
 homeRuns = getArrayFromProperty('Home__Runs', sortedPlayers);
-if (arraysMatch(homeRuns, [1.112, 5.045, 11.2, 15.88, 20.2, 25.03, 31.7, 55.2]))
-	console.log('test 1B passed');
+if (arraysMatch(homeRuns, [1.112, 5.045, 11.2, 15.88, 20.2, 25.03, 31.7, 55.2])) console.log('test 1B passed');
 else console.log('test 1B FAILED');
 
 
@@ -96,8 +93,7 @@ else console.log('test 1B FAILED');
 let errorTriggered = false;
 try {
 	sortedPlayers = getInNumericOrderByProperty('Home__Runs', []);
-}
-catch (e) {
+} catch (e) {
 	errorTriggered = true;
 }
 if (errorTriggered) console.log('test 1C passed');
@@ -118,8 +114,7 @@ players = [
 errorTriggered = false;
 try {
 	sortedPlayers = getInNumericOrderByProperty('Home__Runs', players);
-}
-catch (e) {
+} catch (e) {
 	errorTriggered = true;
 }
 if (errorTriggered) console.log('test 1D passed');
@@ -135,8 +130,7 @@ players = [
 ];
 sortedPlayers = getInNumericOrderByProperty('team.Home__Runs', players);
 homeRuns = getArrayFromProperty('team.Home__Runs', sortedPlayers);
-if (arraysMatch(homeRuns, [3.56, 13.05, 15.88, 19.81]))
-	console.log('test 1E passed');
+if (arraysMatch(homeRuns, [3.56, 13.05, 15.88, 19.81])) console.log('test 1E passed');
 else console.log('test 1E FAILED');
 
 
@@ -144,8 +138,7 @@ else console.log('test 1E FAILED');
 errorTriggered = false;
 try {
 	let result = getInNumericOrderByProperty(0, players);
-}
-catch (e) {
+} catch (e) {
 	errorTriggered = true;
 }
 if (errorTriggered) console.log('test 2 passed');
@@ -156,8 +149,7 @@ else console.log('test 2 FAILED');
 errorTriggered = false;
 try {
 	let result = getInNumericOrderByProperty('team', 'players');
-}
-catch (e) {
+} catch (e) {
 	errorTriggered = true;
 }
 if (errorTriggered) console.log('test 3 passed');
@@ -166,13 +158,13 @@ else console.log('test 3 FAILED');
 
 // Test 4: speed test.
 let objs = [];
-for (let i = 10000; i > 0; --i) {
-	objs.push({homeRuns: i});
-}
-let result = getInNumericOrderByProperty('homeRuns', objs);
+for (let i = 10000; i > 0; --i) objs.push({homeRuns: i});
 
-console.log(result.length); // 10000
-console.log(result[result.length - 1]); // { homeRuns: 10000 }
+let result = getInNumericOrderByProperty('homeRuns', objs);
+if (result.length === objs.length
+	&& result[0]['homeRuns'] === 1 && result[result.length - 1]['homeRuns'] === 10000)
+	console.log('test 4 passed');
+else console.log('test 4 FAILED');
 
 
 players = [
@@ -183,4 +175,54 @@ players = [
 ];
 // sort by the second number in each numbers array:
 sortedPlayers = getInNumericOrderByProperty('numbers.1', players);
-console.log(sortedPlayers);
+result = getArrayFromProperty('numbers.1', sortedPlayers);
+if (arraysMatch(result, [2, 3, 5, 15])) console.log('test 5 passed');
+else console.log('test 5 FAILED');
+
+
+// Make sure it doesn't error if all numbers are the same:
+players = [
+	{name: 'joe', num: 1},
+	{name: 'todd', num: 1},
+	{name: 'rick', num: 1},
+	{name: 'nelly', num: 1}
+];
+sortedPlayers = getInNumericOrderByProperty('num', players);
+result = getArrayFromProperty('num', sortedPlayers);
+if (arraysMatch(result, [1, 1, 1, 1])) console.log('test 6 passed');
+else console.log('test 6 FAILED');
+
+
+// Make sure it doesn't error if the only variation in numbers is tiny:
+players = [
+	{name: 'joe', num: 1},
+	{name: 'todd', num: 1},
+	{name: 'rick', num: 1},
+	{name: 'nelly', num: 1},
+	{name: 'joe', num: 1.00000000000001},
+	{name: 'todd', num: 1},
+	{name: 'rick', num: 1},
+	{name: 'nelly', num: 1},
+	{name: 'todd', num: 1},
+	{name: 'rick', num: 1},
+	{name: 'nelly', num: 1},
+	{name: 'todd', num: 1},
+	{name: 'rick', num: 1},
+	{name: 'nelly', num: 1},
+	{name: 'todd', num: 1},
+	{name: 'rick', num: 1},
+	{name: 'nelly', num: 1},
+	{name: 'todd', num: 1},
+	{name: 'rick', num: 1},
+	{name: 'nelly', num: 1},
+	{name: 'todd', num: 1},
+	{name: 'rick', num: 1},
+	{name: 'nelly', num: 1}
+];
+sortedPlayers = getInNumericOrderByProperty('num', players);
+result = getArrayFromProperty('num', sortedPlayers);
+if (arraysMatch(result, [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1.00000000000001]))
+	console.log('test 7 passed');
+else console.log('test 7 FAILED');
+
+

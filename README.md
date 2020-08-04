@@ -1,18 +1,20 @@
-# getInNumericOrderByProperty(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;property,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objects<br>): any[]
+# getInNumericOrderByProperty(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;property: string,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objects: object[]<br>): object[]
 
 Returns new array of `objects` re-ordered by the numeric value of `property` in each.  
 The `property` in each object must be type 'number' and must be a finite number.  
-The parameter `property` is a string that can include dot notation  
-( i.e,  `'property.subproperty.subsubproperty'` ) .  
 Does not modify original `objects` array.  
 
-NOTE: if any object in `objects` does not have `property`, the function will error.  
+NOTE: `property` can include dot notation ( i.e,  `'property.subproperty.subsubproperty'` ).  
+
 NOTE:  `property` does not have to be an object key.  It can also be an array index.  
 If referring to array indexes, here you need to use dot-notation and not  
-square braces.  Example: `'1.0' instead of [1][0]`
+square braces.  Example: `'1.0' instead of [1][0]`.  
+
+NOTE: if any object in `objects` does not have `property`, the function will error.  
+
 
 ## Examples
-```
+```js
 let players = [
 	{team: 'mets', homeRuns: 15},
 	{team: 'yankees', homeRuns: 25},
@@ -67,19 +69,13 @@ sortedPlayers:
 ```
 
 ## Installation
-
-You must have npm installed first.  Then, in the command line:
-
 ```bash
-npm install @writetome51/get-in-numeric-order-by-property
+npm i @writetome51/get-in-numeric-order-by-property
 ```
 
 ## Loading
-```
-// If using TypeScript:
-import {getInNumericOrderByProperty} from '@writetome51/get-in-numeric-order-by-property';
-// If using ES5 JavaScript:
-var getInNumericOrderByProperty = 
-    require('@writetome51/get-in-numeric-order-by-property').getInNumericOrderByProperty;
+```js
+import {getInNumericOrderByProperty} 
+    from '@writetome51/get-in-numeric-order-by-property';
 ```
 
