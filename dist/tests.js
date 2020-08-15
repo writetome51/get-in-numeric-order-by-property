@@ -1,228 +1,238 @@
-import {getInNumericOrderByProperty} from './index.js';
-import {arraysMatch} from '@writetome51/arrays-match';
-import {getArrayFromProperty} from '@writetome51/get-array-from-property';
-
+import { getInNumericOrderByProperty } from './index.js';
+import { arraysMatch } from '@writetome51/arrays-match';
+import { getArrayFromProperty } from '@writetome51/get-array-from-property';
+console.time('check');
 // Test 0: make sure it can sort a list of only 2 objects without problem.
 let players = [
-	{name: 'red sox', homeRuns: 13.05},
-	{name: 'blue jays', homeRuns: 3.56}
+    { name: 'red sox', homeRuns: 13.05 },
+    { name: 'blue jays', homeRuns: 3.56 }
 ];
 let sortedPlayers = getInNumericOrderByProperty('homeRuns', players);
 let homeRuns = getArrayFromProperty('homeRuns', sortedPlayers);
-
-if (arraysMatch(homeRuns, [3.56, 13.05])) console.log('test 0 passed');
-else console.log('test 0 FAILED');
-
-
+if (arraysMatch(homeRuns, [3.56, 13.05]))
+    console.log('test 0 passed');
+else
+    console.log('test 0 FAILED');
 players = [
-	{team: 'mets', homeRuns: 15},
-	{team: 'yankees', homeRuns: 25},
-	{team: 'athletics', homeRuns: 5},
-	{team: 'braves', homeRuns: 11},
-	{team: 'padres', homeRuns: 1},
-	{team: 'giants', homeRuns: 55},
-	{team: 'angels', homeRuns: 20},
-	{team: 'rockies', homeRuns: 31},
-	{team: 'royals', homeRuns: 2},
-	{team: 'rangers', homeRuns: 10},
-	{team: 'marlins', homeRuns: 5},
-	{team: 'mariners', homeRuns: 14},
-	{team: 'red sox', homeRuns: 70},
-	{team: 'white sox', homeRuns: 15},
-	{team: 'mets', homeRuns: 15},
-	{team: 'yankees', homeRuns: 25},
-	{team: 'athletics', homeRuns: 5},
-	{team: 'padres', homeRuns: 1}
+    { team: 'mets', homeRuns: 15 },
+    { team: 'yankees', homeRuns: 25 },
+    { team: 'athletics', homeRuns: 5 },
+    { team: 'braves', homeRuns: 11 },
+    { team: 'padres', homeRuns: 1 },
+    { team: 'giants', homeRuns: 55 },
+    { team: 'angels', homeRuns: 20 },
+    { team: 'rockies', homeRuns: 31 },
+    { team: 'royals', homeRuns: 2 },
+    { team: 'rangers', homeRuns: 10 },
+    { team: 'marlins', homeRuns: 5 },
+    { team: 'mariners', homeRuns: 14 },
+    { team: 'red sox', homeRuns: 70 },
+    { team: 'white sox', homeRuns: 15 },
+    { team: 'mets', homeRuns: 15 },
+    { team: 'yankees', homeRuns: 25 },
+    { team: 'athletics', homeRuns: 5 },
+    { team: 'padres', homeRuns: 1 }
 ];
-
 // Test 1: make sure it can do a basic integer sort.
 sortedPlayers = getInNumericOrderByProperty('homeRuns', players);
 homeRuns = getArrayFromProperty('homeRuns', sortedPlayers);
 if (arraysMatch(homeRuns, [1, 1, 2, 5, 5, 5, 10, 11, 14, 15, 15, 15, 20, 25, 25, 31, 55, 70]))
-	console.log('test 1 passed');
-else console.log('test 1 FAILED');
-
-
+    console.log('test 1 passed');
+else
+    console.log('test 1 FAILED');
 // Test 1A: make sure it can do a float sort.
 players = [
-	{team: 'mets', homeRuns: 15.88},
-	{team: 'yankees', homeRuns: 25.03},
-	{team: 'athletics', homeRuns: 5.045},
-	{team: 'braves', homeRuns: 11.2},
-	{team: 'padres', homeRuns: 1.112},
-	{team: 'giants', homeRuns: 55.2},
-	{team: 'angels', homeRuns: 20.2},
-	{team: 'rockies', homeRuns: 31.7},
-	{team: 'white sox', homeRuns: 15.999},
-	{team: 'royals', homeRuns: 2.6},
-	{team: 'rangers', homeRuns: 10.1},
-	{team: 'marlins', homeRuns: 5.044},
-	{team: 'mariners', homeRuns: 14.2},
-	{team: 'red sox', homeRuns: 70.2},
-	{team: 'mets', homeRuns: 15.998},
-	{team: 'yankees', homeRuns: 25.02},
-	{team: 'athletics', homeRuns: 5.039},
-	{team: 'padres', homeRuns: 1.111}
+    { team: 'mets', homeRuns: 15.88 },
+    { team: 'yankees', homeRuns: 25.03 },
+    { team: 'athletics', homeRuns: 5.045 },
+    { team: 'braves', homeRuns: 11.2 },
+    { team: 'padres', homeRuns: 1.112 },
+    { team: 'giants', homeRuns: 55.2 },
+    { team: 'angels', homeRuns: 20.2 },
+    { team: 'rockies', homeRuns: 31.7 },
+    { team: 'white sox', homeRuns: 15.999 },
+    { team: 'royals', homeRuns: 2.6 },
+    { team: 'rangers', homeRuns: 10.1 },
+    { team: 'marlins', homeRuns: 5.044 },
+    { team: 'mariners', homeRuns: 14.2 },
+    { team: 'red sox', homeRuns: 70.2 },
+    { team: 'mets', homeRuns: 15.998 },
+    { team: 'yankees', homeRuns: 25.02 },
+    { team: 'athletics', homeRuns: 5.039 },
+    { team: 'padres', homeRuns: 1.111 }
 ];
 sortedPlayers = getInNumericOrderByProperty('homeRuns', players);
 homeRuns = getArrayFromProperty('homeRuns', sortedPlayers);
 if (arraysMatch(homeRuns, [1.111, 1.112, 2.6, 5.039, 5.044, 5.045, 10.1, 11.2, 14.2,
-	15.88, 15.998, 15.999, 20.2, 25.02, 25.03, 31.7, 55.2, 70.2]))
-	console.log('test 1A passed');
-else console.log('test 1A FAILED');
-
-
+    15.88, 15.998, 15.999, 20.2, 25.02, 25.03, 31.7, 55.2, 70.2]))
+    console.log('test 1A passed');
+else
+    console.log('test 1A FAILED');
 // Test 1B: make sure it can recognize a property with capitalization and underscores.
 players = [
-	{team: 'mets', Home__Runs: 15.88},
-	{team: 'yankees', Home__Runs: 25.03},
-	{team: 'athletics', Home__Runs: 5.045},
-	{team: 'braves', Home__Runs: 11.2},
-	{team: 'padres', Home__Runs: 1.112},
-	{team: 'giants', Home__Runs: 55.2},
-	{team: 'angels', Home__Runs: 20.2},
-	{team: 'rockies', Home__Runs: 31.7}
+    { team: 'mets', Home__Runs: 15.88 },
+    { team: 'yankees', Home__Runs: 25.03 },
+    { team: 'athletics', Home__Runs: 5.045 },
+    { team: 'braves', Home__Runs: 11.2 },
+    { team: 'padres', Home__Runs: 1.112 },
+    { team: 'giants', Home__Runs: 55.2 },
+    { team: 'angels', Home__Runs: 20.2 },
+    { team: 'rockies', Home__Runs: 31.7 }
 ];
 sortedPlayers = getInNumericOrderByProperty('Home__Runs', players);
 homeRuns = getArrayFromProperty('Home__Runs', sortedPlayers);
-if (arraysMatch(homeRuns, [1.112, 5.045, 11.2, 15.88, 20.2, 25.03, 31.7, 55.2])) console.log('test 1B passed');
-else console.log('test 1B FAILED');
-
-
+if (arraysMatch(homeRuns, [1.112, 5.045, 11.2, 15.88, 20.2, 25.03, 31.7, 55.2]))
+    console.log('test 1B passed');
+else
+    console.log('test 1B FAILED');
 // Test 1C: it should error if array is empty.
 let errorTriggered = false;
 try {
-	sortedPlayers = getInNumericOrderByProperty('Home__Runs', []);
-} catch (e) {
-	errorTriggered = true;
+    sortedPlayers = getInNumericOrderByProperty('Home__Runs', []);
 }
-if (errorTriggered) console.log('test 1C passed');
-else console.log('test 1C FAILED');
-
-
+catch (e) {
+    errorTriggered = true;
+}
+if (errorTriggered)
+    console.log('test 1C passed');
+else
+    console.log('test 1C FAILED');
 // Test 1D: it should error if any of the objects doesn't have the specified property.
 players = [
-	{team: 'mets', Home__Runs: 15.88},
-	{team: 'yankees', Home__Runs: 25.03},
-	{team: 'athletics', Home__Runs: 5.045},
-	{team: 'braves', Home__Runs: 11.2},
-	{team: 'padres', Home__Runs: 1.112},
-	{team: 'giants', Home__Runs: 55.2},
-	{team: 'angels', Home__Runs: 20.2},
-	{team: 'rockies'}
+    { team: 'mets', Home__Runs: 15.88 },
+    { team: 'yankees', Home__Runs: 25.03 },
+    { team: 'athletics', Home__Runs: 5.045 },
+    { team: 'braves', Home__Runs: 11.2 },
+    { team: 'padres', Home__Runs: 1.112 },
+    { team: 'giants', Home__Runs: 55.2 },
+    { team: 'angels', Home__Runs: 20.2 },
+    { team: 'rockies' }
 ];
 errorTriggered = false;
 try {
-	sortedPlayers = getInNumericOrderByProperty('Home__Runs', players);
-} catch (e) {
-	errorTriggered = true;
+    sortedPlayers = getInNumericOrderByProperty('Home__Runs', players);
 }
-if (errorTriggered) console.log('test 1D passed');
-else console.log('test 1D FAILED');
-
-
+catch (e) {
+    errorTriggered = true;
+}
+if (errorTriggered)
+    console.log('test 1D passed');
+else
+    console.log('test 1D FAILED');
 // Test 1E: it should work with dot-notation in the property.
 players = [
-	{team: {name: 'red sox', Home__Runs: 13.05}},
-	{team: {name: 'blue jays', Home__Runs: 3.56}},
-	{team: {name: 'padres', Home__Runs: 19.81}},
-	{team: {name: 'rockies', Home__Runs: 15.88}}
+    { team: { name: 'red sox', Home__Runs: 13.05 } },
+    { team: { name: 'blue jays', Home__Runs: 3.56 } },
+    { team: { name: 'padres', Home__Runs: 19.81 } },
+    { team: { name: 'rockies', Home__Runs: 15.88 } }
 ];
 sortedPlayers = getInNumericOrderByProperty('team.Home__Runs', players);
 homeRuns = getArrayFromProperty('team.Home__Runs', sortedPlayers);
-if (arraysMatch(homeRuns, [3.56, 13.05, 15.88, 19.81])) console.log('test 1E passed');
-else console.log('test 1E FAILED');
-
-
+if (arraysMatch(homeRuns, [3.56, 13.05, 15.88, 19.81]))
+    console.log('test 1E passed');
+else
+    console.log('test 1E FAILED');
 // Test 2: it should error if first argument is not string.
 errorTriggered = false;
 try {
-	let result = getInNumericOrderByProperty(0, players);
-} catch (e) {
-	errorTriggered = true;
+    let result = getInNumericOrderByProperty(0, players);
 }
-if (errorTriggered) console.log('test 2 passed');
-else console.log('test 2 FAILED');
-
-
+catch (e) {
+    errorTriggered = true;
+}
+if (errorTriggered)
+    console.log('test 2 passed');
+else
+    console.log('test 2 FAILED');
 // Test 3: it should error if second argument is not array.
 errorTriggered = false;
 try {
-	let result = getInNumericOrderByProperty('team', 'players');
-} catch (e) {
-	errorTriggered = true;
+    let result = getInNumericOrderByProperty('team', 'players');
 }
-if (errorTriggered) console.log('test 3 passed');
-else console.log('test 3 FAILED');
-
-
+catch (e) {
+    errorTriggered = true;
+}
+if (errorTriggered)
+    console.log('test 3 passed');
+else
+    console.log('test 3 FAILED');
 // Test 4: speed test.
 let objs = [];
-for (let i = 10000; i > 0; --i) objs.push({homeRuns: i});
-
+for (let i = 10000; i > 0; --i)
+    objs.push({ homeRuns: i });
 let result = getInNumericOrderByProperty('homeRuns', objs);
 if (result.length === objs.length
-	&& result[0]['homeRuns'] === 1 && result[result.length - 1]['homeRuns'] === 10000)
-	console.log('test 4 passed');
-else console.log('test 4 FAILED');
-
-
+    && result[0]['homeRuns'] === 1 && result[result.length - 1]['homeRuns'] === 10000)
+    console.log('test 4 passed');
+else
+    console.log('test 4 FAILED');
 players = [
-	{name: 'joe', numbers: [10, 5, 20]},
-	{name: 'todd', numbers: [7, 15, 9]},
-	{name: 'rick', numbers: [1, 2, 19]},
-	{name: 'nelly', numbers: [4, 3, 21]}
+    { name: 'joe', numbers: [10, 5, 20] },
+    { name: 'todd', numbers: [7, 15, 9] },
+    { name: 'rick', numbers: [1, 2, 19] },
+    { name: 'nelly', numbers: [4, 3, 21] }
 ];
 // sort by the second number in each numbers array:
 sortedPlayers = getInNumericOrderByProperty('numbers.1', players);
 result = getArrayFromProperty('numbers.1', sortedPlayers);
-if (arraysMatch(result, [2, 3, 5, 15])) console.log('test 5 passed');
-else console.log('test 5 FAILED');
-
-
+if (arraysMatch(result, [2, 3, 5, 15]))
+    console.log('test 5 passed');
+else
+    console.log('test 5 FAILED');
 // Make sure it doesn't error if all numbers are the same:
 players = [
-	{name: 'joe', num: 1},
-	{name: 'todd', num: 1},
-	{name: 'rick', num: 1},
-	{name: 'nelly', num: 1}
+    { name: 'joe', num: 1 },
+    { name: 'todd', num: 1 },
+    { name: 'rick', num: 1 },
+    { name: 'nelly', num: 1 }
 ];
 sortedPlayers = getInNumericOrderByProperty('num', players);
 result = getArrayFromProperty('num', sortedPlayers);
-if (arraysMatch(result, [1, 1, 1, 1])) console.log('test 6 passed');
-else console.log('test 6 FAILED');
-
-
+if (arraysMatch(result, [1, 1, 1, 1]))
+    console.log('test 6 passed');
+else
+    console.log('test 6 FAILED');
 // Make sure it doesn't error if the only variation in numbers is tiny:
 players = [
-	{name: 'joe', num: 1},
-	{name: 'todd', num: 1},
-	{name: 'rick', num: 1},
-	{name: 'nelly', num: 1},
-	{name: 'joe', num: 1.00000000000001},
-	{name: 'todd', num: 1},
-	{name: 'rick', num: 1},
-	{name: 'nelly', num: 1},
-	{name: 'todd', num: 1},
-	{name: 'rick', num: 1},
-	{name: 'nelly', num: 1},
-	{name: 'todd', num: 1},
-	{name: 'rick', num: 1},
-	{name: 'nelly', num: 1},
-	{name: 'todd', num: 1},
-	{name: 'rick', num: 1},
-	{name: 'nelly', num: 1},
-	{name: 'todd', num: 1},
-	{name: 'rick', num: 1},
-	{name: 'nelly', num: 1},
-	{name: 'todd', num: 1},
-	{name: 'rick', num: 1},
-	{name: 'nelly', num: 1}
+    { name: 'joe', num: 1 },
+    { name: 'todd', num: 1 },
+    { name: 'rick', num: 1 },
+    { name: 'nelly', num: 1 },
+    { name: 'joe', num: 1.00000000000001 },
+    { name: 'todd', num: 1 },
+    { name: 'rick', num: 1 },
+    { name: 'nelly', num: 1 },
+    { name: 'todd', num: 1 },
+    { name: 'rick', num: 1 },
+    { name: 'nelly', num: 1 },
+    { name: 'todd', num: 1 },
+    { name: 'rick', num: 1 },
+    { name: 'nelly', num: 1 },
+    { name: 'todd', num: 1 },
+    { name: 'rick', num: 1 },
+    { name: 'nelly', num: 1 },
+    { name: 'todd', num: 1 },
+    { name: 'rick', num: 1 },
+    { name: 'nelly', num: 1 },
+    { name: 'todd', num: 1 },
+    { name: 'rick', num: 1 },
+    { name: 'nelly', num: 1 }
 ];
 sortedPlayers = getInNumericOrderByProperty('num', players);
 result = getArrayFromProperty('num', sortedPlayers);
 if (arraysMatch(result, [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1.00000000000001]))
-	console.log('test 7 passed');
-else console.log('test 7 FAILED');
-
-
+    console.log('test 7 passed');
+else
+    console.log('test 7 FAILED');
+let arr = [
+    [4], [2], [1], [4], [2], [1], [4], [2], [1], [4], [2]
+];
+result = getInNumericOrderByProperty('0', arr);
+result = getArrayFromProperty('0', result);
+if (arraysMatch(result, [1, 1, 1, 2, 2, 2, 2, 4, 4, 4, 4]))
+    console.log('test 8 passed');
+else
+    console.log('test 8 FAILED');
+console.timeEnd('check');
+// Using optimized version:
+//avg of 11 tests:  137.19ms

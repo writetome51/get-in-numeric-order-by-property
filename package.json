@@ -1,6 +1,6 @@
 {
   "name": "@writetome51/get-in-numeric-order-by-property",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Re-orders objects by the numeric value of a particular property in each.",
   "type": "module",
   "main": "dist/index.js",
